@@ -12,30 +12,32 @@
     align-items: center;
     justify-content: center;
     background: #0b1d3a;
+    color: #fff;
     font-family: sans-serif;
-  }
-  button {
-    padding: 16px 40px;
-    font-size: 20px;
-    border: none;
-    border-radius: 12px;
-    background: #fff;
-    color: #0b1d3a;
-    cursor: pointer;
+    font-size: 22px;
   }
 </style>
 </head>
 <body>
-  <button id="btn">اضغط للدخول 🎵</button>
-  <audio id="music" src="music.mp3" loop></audio>
+  <p id="msg">🎵</p>
+  <audio id="music" src="VYRO-1790815788246.mp3" loop autoplay></audio>
 
   <script>
-    const btn = document.getElementById('btn');
     const music = document.getElementById('music');
-    btn.addEventListener('click', () => {
-      music.play();
-      btn.textContent = 'شغّال 🎶';
-    });
+
+    function start() {
+      music.play().then(() => {
+        ['click','touchstart','keydown','scroll','mousemove']
+          .forEach(e => document.removeEventListener(e, start));
+      }).catch(() => {});
+    }
+
+    // محاولة تشغيل مباشرة
+    start();
+
+    // لو انمنعت، تشتغل مع أول تفاعل
+    ['click','touchstart','keydown','scroll','mousemove']
+      .forEach(e => document.addEventListener(e, start));
   </script>
 </body>
 </html>
